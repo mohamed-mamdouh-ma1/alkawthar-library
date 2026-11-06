@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>لوحة المنتجات | مكتبة الكوثر</title>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:#fff;color:#111;font-family:'Tajawal','Segoe UI',Tahoma,sans-serif;line-height:1.6}
+main{max-width:920px;margin:auto;padding:20px 16px 60px}h1{font-size:26px;margin:0 0 4px}h2{font-size:20px;margin:30px 0 10px}p.s{color:#767676;margin:0 0 18px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){form{grid-template-columns:1fr}}
+label{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:500}.w{grid-column:1/-1}
+input,select,textarea{font:inherit;font-size:16px;padding:10px;border:1px solid #ccc;border-radius:6px;background:#fff;color:#111}
+button{font:inherit;cursor:pointer;border-radius:6px;padding:10px 20px;border:1px solid #111;background:#111;color:#fff;font-weight:500}button.g{background:#fff;color:#111}button:disabled{opacity:.5;cursor:wait}
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{border-bottom:1px solid #e6e6e6;padding:8px 6px;text-align:start}th{color:#767676;font-weight:500}
+td img{width:40px;height:52px;object-fit:cover;vertical-align:middle;background:#f5f5f5}td button{padding:4px 10px;font-size:13px}.pv{display:flex;gap:6px;flex-wrap:wrap}.pv img{width:60px;height:80px;object-fit:cover}
+.m{padding:10px 12px;border-radius:6px;margin:12px 0;border:1px solid #ccc;background:#f5f5f5}.m.ok{background:#f0f8f0;border-color:#b6dcb6}.m.err{background:#fdf0f0;border-color:#e0b4b4}.m.wn{background:#fff7e0;border-color:#e6d28a}
+#lg{max-width:380px;margin:80px auto;display:flex;flex-direction:column;gap:12px}
+h3{font-size:16px;margin:14px 0 0}.brr{display:grid;grid-template-columns:1fr 1fr;gap:8px;border:1px solid #e6e6e6;padding:10px;margin-bottom:8px;border-radius:6px}.brr .w{grid-column:1/-1}.ck{flex-direction:row;align-items:center;gap:8px}.ck input{width:auto}
+.tile{display:flex;flex-direction:column;gap:4px;align-items:center;font-size:12px}.tile img{width:80px;height:106px;object-fit:cover;background:#f5f5f5}.tile .tb2{display:flex;gap:4px}.tile button{padding:2px 8px;font-size:13px}.tile .m1{background:#111;color:#fff;border-radius:4px;padding:0 6px}.chp{display:inline-flex;align-items:center;gap:6px;border:1px solid #ccc;border-radius:20px;padding:4px 12px}.chp button{padding:0 6px;border:0;background:none;color:#111;font-size:16px}
+</style>
+</head>
+<body>
+<main>
+<div id="lg">
+ <h1>لوحة المنتجات</h1><p class="s">اكتبي كلمة المرور للدخول.</p>
+ <input id="pw" type="password" placeholder="كلمة المرور" autocomplete="current-password">
+ <button id="go">دخول</button><div class="m err" id="le" hidden></div>
+</div>
+<div id="app" hidden>
+<div class="bar" style="justify-content:space-between"><div><h1>إدارة المنتجات</h1><p class="s" id="src"></p></div><div class="bar"><a href="/" target="_blank"><button class="g" type="button">فتح الموقع</button></a><button class="g" id="out" type="button">خروج</button></div></div>
+<div class="m wn" id="warn" hidden>مخزن الصور (Blob) غير موصول بالمشروع في Vercel، لن يعمل الحفظ قبل توصيله.</div>
+<div class="bar" id="tabs" style="margin-top:14px"><button type="button" id="bP">المنتجات</button><button type="button" class="g" id="bS">إعدادات الموقع</button><button type="button" class="g" id="bA">الإحصائيات</button></div>
+<div id="tP"><h2 id="ft">إضافة منتج جديد</h2>
+<form id="f">
+ <label>القسم<select id="cat"><option value="school">أدوات مدرسية</option><option value="office">أدوات مكتبية</option><option value="notebooks">كراريس ودفاتر</option><option value="gifts">هدايا وألعاب</option></select></label>
+ <label>كود المنتج<input id="code" required dir="ltr" placeholder="SC-101"></label>
+ <label class="w">اسم المنتج<input id="name" required placeholder="مثال: قلم جاف أزرق (علبة 50)"></label>
+ <label>السعر (ج.م)<input id="price" type="number" min="0" step="0.5" required></label>
+ <div class="w"><label class="ck"><input type="checkbox" id="dc_on"> عليه خصم (يظهر السعر قبل الخصم مشطوبًا وبعده)</label>
+  <div class="bar" id="dc_box" hidden style="margin-top:6px"><select id="dc_type"><option value="percent">نسبة خصم %</option><option value="amount">مبلغ خصم (ج.م)</option></select><input id="dc_val" type="number" min="0" step="0.5" placeholder="القيمة" style="width:130px"><b id="dc_pv"></b></div></div>
+ <div class="w"><b style="font-size:14px">الألوان المتاحة</b> <span style="color:#767676;font-size:13px">(اكتبي اللون واضغطي «إضافة لون». العميل يختار منها قبل الطلب، ويظهر اللون في رسالة واتساب)</span>
+  <div class="bar" style="margin-top:6px"><input id="colin" placeholder="مثال: كحلي" style="flex:1"><button type="button" class="g" id="coladd">إضافة لون</button></div><div class="pv" id="colchips" style="margin-top:8px"></div></div>
+ <label>المقاس / الحجم (اختياري)<input id="size" placeholder="مثال: A4 أو 100 ورقة"></label>
+ <label>العلامة<select id="tag"><option value="">بدون</option><option>جديد</option><option>الأكثر مبيعًا</option></select></label>
+ <label class="w">وصف المنتج (اختياري — لو تُرك فارغًا يظهر وصف القسم)<textarea id="desc" rows="3"></textarea></label>
+ <label class="w">المميزات (اختياري — كل ميزة في سطر)<textarea id="feat" rows="4" placeholder="خامة ناعمة وخفيفة&#10;أكمام واسعة&#10;مناسبة للمناسبات"></textarea></label>
+ <label class="w">إضافة صور (حتى 6 صور). الصورة الأولى هي الأساسية، ورتّبيهم بالأسهم أو احذفي أي صورة<input id="imgs" type="file" accept="image/*" multiple></label>
+ <div class="w pv" id="pv"></div>
+ <div class="w bar"><button type="submit" id="save">حفظ المنتج</button><button type="button" class="g" id="rst">مسح النموذج</button></div>
+</form>
+<div class="m" id="msg" hidden></div>
+<h2>كل المنتجات (<span id="n"></span>)</h2>
+<table><thead><tr><th>صورة</th><th>الكود</th><th>الاسم</th><th>السعر</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+<div id="tA" hidden>
+<h2>إحصائيات الزيارات</h2>
+<p>إحصائيات الزيارات بتتم عن طريق <b>Vercel Web Analytics</b> (مجاني ضمن حدود الخطة)، وبتشوفها من لوحة Vercel نفسها.</p>
+<div class="m wn"><b>تفعيل مرة واحدة:</b> افتحي مشروع المكتبة في Vercel ← تبويب <b>Analytics</b> ← اضغطي <b>Enable</b>. بعدها اعملي زيارة للموقع وستظهر الأرقام خلال دقايق.</div>
+<div class="bar"><a href="https://vercel.com/dashboard" target="_blank" rel="noopener"><button type="button">فتح إحصائيات الموقع</button></a></div>
+<h3>اللي هتشوفيه</h3>
+<ul><li>عدد الزوار وعدد مرات فتح الصفحة (يومي/أسبوعي/شهري).</li><li>من أين جاء الزوار (واتساب، فيسبوك، إنستجرام، بحث...).</li><li>الدول والأجهزة (موبايل/كمبيوتر) والمتصفحات.</li></ul>
+<h3>ملاحظات</h3>
+<ul><li>الخطة المجانية (Hobby): 50,000 حدث في الشهر، ومدة حفظ البيانات شهر واحد.</li><li>عدد ضغطات «اطلبي عبر واتساب» لكل منتج بيتسجل كحدث مخصص، وبيظهر في Vercel على خطة Pro بس.</li><li>الإحصائيات مش بتظهر داخل هذه اللوحة، لكن تقدري تفتحيها بالزرار فوق.</li></ul>
+</div>
+<div id="tS" hidden>
+<h2>إعدادات الموقع</h2>
+<form id="sf">
+ <label>عنوان الصفحة<input id="s_title"></label>
+ <label>الجملة تحت العنوان<input id="s_sub"></label>
+ <label>لون الأزرار والشارات<input id="s_ac" type="color" style="height:44px;padding:2px"></label>
+ <label>اللوجو (اتركيه فارغًا للإبقاء على الحالي)<input id="s_logo" type="file" accept="image/*"></label>
+ <div class="w pv" id="s_lp"></div>
+ <h3 class="w">شريط الإعلان أعلى الصفحة</h3>
+ <label class="w ck"><input type="checkbox" id="s_an_on"> إظهار الشريط</label>
+ <label>نص الإعلان<input id="s_an_t"></label>
+ <label>رابط عند الضغط (اختياري)<input id="s_an_l" dir="ltr" placeholder="https://"></label>
+ <h3 class="w">التواصل</h3>
+ <label>رقم واتساب (بصيغة دولية مثل 201144157444)<input id="s_wa" dir="ltr"></label>
+ <label>رقم الهاتف<input id="s_ph" dir="ltr"></label>
+ <label>رقم هاتف ثاني (اختياري)<input id="s_ph2" dir="ltr"></label>
+ <label class="w">العنوان<input id="s_ad"></label>
+ <label>فيسبوك<input id="s_fb" dir="ltr" placeholder="https://"></label>
+ <label>إنستجرام<input id="s_ig" dir="ltr" placeholder="https://"></label>
+ <label>تيليجرام<input id="s_tg" dir="ltr" placeholder="https://"></label>
+ <h3 class="w">خدمة الطباعة والتصوير</h3>
+ <label class="w ck"><input type="checkbox" id="s_pr_on"> إظهار تبويب «طباعة وتصوير» للزبائن</label>
+ <label class="w">ملاحظة تظهر في صفحة الطباعة (مثلًا الأسعار: ورقة أبيض وأسود 1 جنيه، ألوان 5 جنيه)<textarea id="s_pr_info" rows="3"></textarea></label>
+ <label>حذف ملفات الطباعة بعد (أيام)<input id="s_pr_days" type="number" min="1" max="60"></label>
+ <div class="bar"><button type="button" class="g" id="s_pr_clean">حذف ملفات الطباعة القديمة الآن</button></div>
+ <h3 class="w">الأقسام</h3>
+ <div class="w" id="s_cats"></div>
+ <div class="w bar"><button type="button" class="g" id="s_addc">إضافة قسم</button><span style="color:#767676;font-size:13px">ترتيب الأقسام هنا هو ترتيبها في الموقع. لا يمكن حذف قسم فيه منتجات.</span></div>
+ <h3 class="w">الشارات على المنتجات</h3>
+ <label class="ck"><input type="checkbox" id="s_sb"> إظهار «الأكثر مبيعًا»</label><label class="ck"><input type="checkbox" id="s_sn"> إظهار «جديد»</label>
+ <h3 class="w">الفروع</h3>
+ <div class="w" id="s_br"></div>
+ <div class="w bar"><button type="button" class="g" id="s_addbr">إضافة فرع</button></div>
+ <div class="w bar"><button type="submit" id="s_save">حفظ الإعدادات</button></div>
+</form>
+<div class="m" id="smsg" hidden></div>
+</div>
+</div>
+</main>
+<script>
+let CATL=[{key:"school",name:"أدوات مدرسية",prefix:"SC"},{key:"office",name:"أدوات مكتبية",prefix:"OF"},{key:"notebooks",name:"كراريس ودفاتر",prefix:"NB"},{key:"gifts",name:"هدايا وألعاب",prefix:"GF"}];
+const $=s=>document.querySelector(s),esc=t=>String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const src=k=>/^https?:/.test(k)?k:"img/"+k;
+let PW=sessionStorage.getItem("klpw")||"",L=[],E=null,IM=[],COL=[];
+async function api(b){const r=await fetch("/api/admin",{method:"POST",headers:{"Content-Type":"application/json","x-admin-password":PW},body:JSON.stringify(b)});
+ const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||("خطأ "+r.status));return d}
+function msg(t,k){const m=$("#msg");m.hidden=!t;m.textContent=t||"";m.className="m "+(k||"")}
+const next=c=>{const pf=(CATL.find(x=>x.key==c)||{}).prefix||"XX",n=L.filter(p=>p.cat==c).map(p=>+(p.code.split("-")[1])||0);return pf+"-"+(n.length?Math.max(...n)+1:101)};
+function list(){$("#n").textContent=L.length;$("#tb").innerHTML=L.map(p=>`<tr><td><img src="${esc(src(p.images[0]||""))}" alt=""></td><td dir="ltr">${esc(p.code)}</td><td>${esc(p.name)}</td><td>${p.salePrice!=null?`<s style="color:#767676">${p.price}</s> <b>${p.salePrice}</b>`:p.price}</td><td><button class="g" data-e="${esc(p.code)}">تعديل</button> <button class="g" data-d="${esc(p.code)}">حذف</button></td></tr>`).join("")}
+function dcPrev(){const on=$("#dc_on").checked;$("#dc_box").hidden=!on;const p=+$("#price").value,t=$("#dc_type").value,x=+$("#dc_val").value;
+ if(!on||!p||!x){$("#dc_pv").textContent="";return}
+ const f=t=="percent"?p*(1-x/100):p-x;$("#dc_pv").textContent=(f>0&&f<p)?`السعر بعد الخصم: ${Math.round(f*100)/100} ج.م (بدل ${p})`:"قيمة الخصم غير صحيحة"}
+["dc_on","dc_type","dc_val","price"].forEach(i=>{$("#"+i).oninput=dcPrev;$("#"+i).onchange=dcPrev});
+function pvRender(){$("#pv").innerHTML=IM.map((it,i)=>`<div class="tile"><img src="${esc(it.prev)}" alt="">${i==0?'<span class="m1">الأساسية</span>':""}<div class="tb2"><button type="button" class="g" data-mi="${i}" data-d="-1" aria-label="نقل لليمين">→</button><button type="button" class="g" data-mi="${i}" data-d="1" aria-label="نقل لليسار">←</button><button type="button" class="g" data-mi="${i}" data-x="1" aria-label="حذف">✕</button></div></div>`).join("")}
+function colRender(){$("#colchips").innerHTML=COL.map((c,i)=>`<span class="chp">${esc(c)}<button type="button" data-ci="${i}" aria-label="حذف اللون">×</button></span>`).join("")}
+function addCol(){const x=$("#colin").value.trim();if(x&&!COL.includes(x)&&COL.length<12){COL.push(x);colRender()}$("#colin").value=""}
+$("#coladd").onclick=addCol;$("#colin").onkeydown=e=>{if(e.key=="Enter"){e.preventDefault();addCol()}};
+$("#colchips").onclick=e=>{const i=e.target.dataset.ci;if(i!==undefined){COL.splice(+i,1);colRender()}};
+$("#pv").onclick=e=>{const b=e.target.closest("[data-mi]");if(!b)return;const i=+b.dataset.mi;
+ if(b.dataset.x){IM.splice(i,1)}else{const j=i+ +b.dataset.d;if(j<0||j>=IM.length)return;[IM[i],IM[j]]=[IM[j],IM[i]]}pvRender()};
+function clear(){E=null;IM=[];COL=[];$("#f").reset();pvRender();colRender();$("#code").value=next($("#cat").value);$("#save").textContent="حفظ المنتج";$("#ft").textContent="إضافة منتج جديد"}
+async function enter(){const d=await api({action:"login"});$("#lg").hidden=true;$("#app").hidden=false;$("#warn").hidden=!!d.blob;sessionStorage.setItem("klpw",PW);if(d.blob){await refresh();await loadS()}}
+async function refresh(){const d=await api({action:"list"});L=d.products;$("#src").textContent=d.source=="blob"?"متصل بمخزن الموقع — أي تغيير يظهر على الموقع خلال دقيقة تقريبًا.":"القائمة الأولية — أول حفظ سيحوّلها إلى مخزن الموقع.";clear();list()}
+$("#go").onclick=async()=>{PW=$("#pw").value;$("#le").hidden=true;try{await enter()}catch(e){PW="";$("#le").hidden=false;$("#le").textContent=e.message}};
+$("#pw").onkeydown=e=>{if(e.key=="Enter")$("#go").click()};
+$("#out").onclick=()=>{sessionStorage.removeItem("klpw");location.reload()};
+$("#cat").onchange=()=>{if(!E)$("#code").value=next($("#cat").value)};
+$("#rst").onclick=()=>{clear();msg("")};
+function rs(file){return new Promise((ok,bad)=>{const i=new Image();i.onload=()=>{const k=Math.min(1,1000/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);c.toBlob(ok,"image/jpeg",.82)};i.onerror=()=>bad(new Error("تعذّر قراءة الصورة."));i.src=URL.createObjectURL(file)})}
+const b64=b=>new Promise(r=>{const f=new FileReader();f.onload=()=>r(String(f.result).split(",")[1]);f.readAsDataURL(b)});
+$("#imgs").onchange=async e=>{for(const f of [...e.target.files]){if(IM.length>=6){msg("الحد الأقصى 6 صور.","err");break}try{const b=await rs(f);IM.push({blob:b,prev:URL.createObjectURL(b)})}catch(x){msg(x.message,"err")}}e.target.value="";pvRender()};
+$("#f").onsubmit=async e=>{e.preventDefault();const btn=$("#save");btn.disabled=true;msg("جارٍ الحفظ...");
+ try{addCol();const code=$("#code").value.trim().toUpperCase(),images=[];
+  for(let i=0;i<IM.length;i++){const it=IM[i];if(it.blob){msg(`جارٍ رفع الصورة ${i+1} من ${IM.length}...`);images.push((await api({action:"upload",data:await b64(it.blob)})).url)}else images.push(it.ref)}
+  if(!images.length)throw new Error("أضيفي صورة واحدة على الأقل.");
+  msg("جارٍ حفظ المنتج...");
+  const p={code,name:$("#name").value.trim(),cat:$("#cat").value,price:+$("#price").value,discount:$("#dc_on").checked?{type:$("#dc_type").value,value:+$("#dc_val").value}:null,colors:COL.slice(),size:$("#size").value.trim(),tag:$("#tag").value,images,desc:$("#desc").value.trim(),features:$("#feat").value.split("\n").map(x=>x.trim()).filter(Boolean)};
+  const d=await api({action:"save",oldCode:E,product:p});L=d.products;clear();list();msg("تم حفظ "+code+". سيظهر على الموقع خلال دقيقة تقريبًا.","ok")
+ }catch(x){msg(x.message,"err")}finally{btn.disabled=false}};
+$("#tb").onclick=async e=>{const d=e.target.dataset.d,ed=e.target.dataset.e;
+ if(d&&confirm("حذف المنتج "+d+" نهائيًا؟")){msg("جارٍ الحذف...");try{L=(await api({action:"delete",code:d})).products;list();clear();msg("تم حذف "+d+".","ok")}catch(x){msg(x.message,"err")}}
+ if(ed){const p=L.find(x=>x.code==ed);E=ed;IM=p.images.map(i=>({ref:i,prev:src(i)}));COL=(p.colors&&p.colors.length?p.colors:(p.color?[p.color]:[])).slice();pvRender();colRender();
+  $("#cat").value=p.cat;$("#code").value=p.code;$("#name").value=p.name;$("#price").value=p.price;$("#dc_on").checked=!!p.discount;$("#dc_type").value=p.discount?p.discount.type:"percent";$("#dc_val").value=p.discount?p.discount.value:"";dcPrev();$("#size").value=p.size||"";$("#tag").value=p.tag||"";$("#desc").value=p.desc||"";$("#feat").value=(p.features||[]).join("\n");$("#imgs").value="";
+  $("#save").textContent="حفظ التعديل";$("#ft").textContent="تعديل "+ed;msg("");scrollTo({top:0,behavior:"smooth"})}};
+
+let ST=null,LOGO=null;
+function tab(n){$("#tP").hidden=n!="P";$("#tS").hidden=n!="S";$("#tA").hidden=n!="A";$("#bP").className=n=="P"?"":"g";$("#bS").className=n=="S"?"":"g";$("#bA").className=n=="A"?"":"g"}
+$("#bP").onclick=()=>tab("P");$("#bS").onclick=()=>tab("S");$("#bA").onclick=()=>tab("A");
+function smsg(t,k){const m=$("#smsg");m.hidden=!t;m.textContent=t||"";m.className="m "+(k||"")}
+function setCats(cs){CATL=cs;const cur=$("#cat").value;$("#cat").innerHTML=cs.map(c=>`<option value="${esc(c.key)}">${esc(c.name)}</option>`).join("");if(cs.some(c=>c.key==cur))$("#cat").value=cur}
+const catRow=(c={})=>`<div class="brr crow" data-key="${esc(c.key||"")}"><label>اسم القسم<input data-f="name" value="${esc(c.name||"")}"></label><label>بادئة الكود (حروف إنجليزية مثل SH)<input data-f="prefix" dir="ltr" maxlength="4" value="${esc(c.prefix||"")}"></label><div class="w bar"><button type="button" class="g" data-up>↑ للأعلى</button><button type="button" class="g" data-down>↓ للأسفل</button><button type="button" class="g" data-rmc>حذف القسم</button></div></div>`;
+$("#s_pr_clean").onclick=async()=>{smsg("جارٍ التنظيف...");try{const d=await api({action:"cleanPrint"});smsg(`تم حذف ${d.deleted} ملف (الأقدم من ${d.days} يوم).`,"ok")}catch(x){smsg(x.message,"err")}};
+$("#s_cats").onclick=e=>{const row=e.target.closest(".crow");if(!row)return;if("rmc" in e.target.dataset)row.remove();else if("up" in e.target.dataset&&row.previousElementSibling)row.previousElementSibling.before(row);else if("down" in e.target.dataset&&row.nextElementSibling)row.nextElementSibling.after(row)};
+$("#s_addc").onclick=()=>$("#s_cats").insertAdjacentHTML("beforeend",catRow({}));
+const brRow=(b={})=>`<div class="brr"><label class="w">اسم الفرع<input data-f="name" value="${esc(b.name||"")}"></label><label>العنوان<input data-f="addr" value="${esc(b.addr||"")}"></label><label>الهاتف<input data-f="phone" dir="ltr" value="${esc(b.phone||"")}"></label><label class="w">رابط الخريطة (اختياري — لو تُرك فارغًا يبحث جوجل عن اسم الفرع)<input data-f="map" dir="ltr" value="${esc(b.map||"")}"></label><div class="w"><button type="button" class="g" data-rm>حذف الفرع</button></div></div>`;
+function fillS(s){ST=s;LOGO=null;$("#s_title").value=s.title||"";$("#s_sub").value=s.subtitle||"";$("#s_ac").value=s.accent||"#111111";$("#s_lp").innerHTML=s.logo?`<img src="${esc(s.logo)}" alt="">`:"";$("#s_logo").value="";
+ $("#s_an_on").checked=!!s.announce.on;$("#s_an_t").value=s.announce.text||"";$("#s_an_l").value=s.announce.link||"";
+ $("#s_wa").value=s.wa||"";$("#s_ph").value=s.phone||"";$("#s_ph2").value=s.phone2||"";$("#s_pr_on").checked=s.printEnabled!==false;$("#s_pr_info").value=s.printInfo||"";$("#s_pr_days").value=s.printKeepDays||7;$("#s_ad").value=s.addr||"";$("#s_fb").value=s.fb||"";$("#s_ig").value=s.ig||"";$("#s_tg").value=s.tg||"";
+ $("#s_cats").innerHTML=(s.categories||[]).map(catRow).join("");
+ $("#s_sb").checked=s.showBest!==false;$("#s_sn").checked=s.showNew!==false;
+ $("#s_br").innerHTML=(s.branches||[]).map(brRow).join("")}
+function readS(){return{title:$("#s_title").value,subtitle:$("#s_sub").value,accent:$("#s_ac").value,logo:ST?ST.logo:"",
+ announce:{on:$("#s_an_on").checked,text:$("#s_an_t").value,link:$("#s_an_l").value},
+ wa:$("#s_wa").value,phone:$("#s_ph").value,phone2:$("#s_ph2").value,printEnabled:$("#s_pr_on").checked,printInfo:$("#s_pr_info").value,printKeepDays:$("#s_pr_days").value,addr:$("#s_ad").value,fb:$("#s_fb").value,ig:$("#s_ig").value,tg:$("#s_tg").value,
+ categories:[...document.querySelectorAll("#s_cats .crow")].map((row,i)=>({key:row.dataset.key||("c"+Date.now().toString(36)+i),name:row.querySelector('[data-f="name"]').value,prefix:row.querySelector('[data-f="prefix"]').value})),
+ showBest:$("#s_sb").checked,showNew:$("#s_sn").checked,
+ branches:[...document.querySelectorAll("#s_br .brr")].map(r=>{const o={};r.querySelectorAll("[data-f]").forEach(i=>o[i.dataset.f]=i.value);return o})}}
+$("#s_br").onclick=e=>{if(e.target.dataset.rm!==undefined)e.target.closest(".brr").remove()};
+$("#s_addbr").onclick=()=>$("#s_br").insertAdjacentHTML("beforeend",brRow());
+function rsPng(file){return new Promise((ok,bad)=>{const i=new Image();i.onload=()=>{const k=Math.min(1,500/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);c.toBlob(ok,"image/png")};i.onerror=()=>bad(new Error("تعذّر قراءة الصورة."));i.src=URL.createObjectURL(file)})}
+$("#s_logo").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{LOGO=await rsPng(f);$("#s_lp").innerHTML=`<img src="${URL.createObjectURL(LOGO)}" alt="">`}catch(x){smsg(x.message,"err")}};
+async function loadS(){const d=await api({action:"getSettings"});fillS(d.settings);setCats(d.settings.categories);if(!E)$("#code").value=next($("#cat").value)}
+$("#sf").onsubmit=async e=>{e.preventDefault();const b=$("#s_save");b.disabled=true;smsg("جارٍ الحفظ...");
+ try{const s=readS();if(LOGO){smsg("جارٍ رفع اللوجو...");s.logo=(await api({action:"upload",data:await b64(LOGO)})).url}
+  const d=await api({action:"saveSettings",settings:s});fillS(d.settings);setCats(d.settings.categories);smsg("تم حفظ الإعدادات. ستظهر على الموقع خلال دقيقة تقريبًا.","ok")}catch(x){smsg(x.message,"err")}finally{b.disabled=false}};
+if(PW)enter().catch(()=>{PW="";sessionStorage.removeItem("klpw")});
+</script>
+</body>
+</html>
