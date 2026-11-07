@@ -28,7 +28,7 @@ export default async function handler(req, res) {
   const origin = req.headers.origin, host = req.headers["x-forwarded-host"] || req.headers.host;
   if (origin) { try { if (new URL(origin).host !== host) return res.status(403).json({ error: "غير مسموح." }); } catch (e) { return res.status(403).json({ error: "غير مسموح." }); } }
   const ip = String(req.headers["x-forwarded-for"] || "").split(",")[0].trim() || "x";
-  if (limited(ip)) return res.status(429).json({ error: "عدد كبير من الرفع، حاولي بعد قليل." });
+  if (limited(ip)) return res.status(429).json({ error: "عدد كبير من الرفع، حاول بعد قليل." });
   try {
     const b = req.body || {}, name = String(b.name || ""), ext = (name.split(".").pop() || "").toLowerCase();
     if (!EXT[ext]) return res.status(400).json({ error: "نوع الملف غير مدعوم (PDF أو Word أو PowerPoint أو Excel أو صور)." });

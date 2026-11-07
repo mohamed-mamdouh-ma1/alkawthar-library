@@ -25,7 +25,7 @@ h3{font-size:16px;margin:14px 0 0}.brr{display:grid;grid-template-columns:1fr 1f
 <body>
 <main>
 <div id="lg">
- <h1>لوحة المنتجات</h1><p class="s">اكتبي كلمة المرور للدخول.</p>
+ <h1>لوحة المنتجات</h1><p class="s">اكتب كلمة المرور للدخول.</p>
  <input id="pw" type="password" placeholder="كلمة المرور" autocomplete="current-password">
  <button id="go">دخول</button><div class="m err" id="le" hidden></div>
 </div>
@@ -36,18 +36,18 @@ h3{font-size:16px;margin:14px 0 0}.brr{display:grid;grid-template-columns:1fr 1f
 <div id="tP"><h2 id="ft">إضافة منتج جديد</h2>
 <form id="f">
  <label>القسم<select id="cat"><option value="school">أدوات مدرسية</option><option value="office">أدوات مكتبية</option><option value="notebooks">كراريس ودفاتر</option><option value="gifts">هدايا وألعاب</option></select></label>
- <label>كود المنتج<input id="code" required dir="ltr" placeholder="SC-101"></label>
+ <label>كود المنتج (اختياري)<input id="code" dir="ltr" placeholder="SC-101"></label>
  <label class="w">اسم المنتج<input id="name" required placeholder="مثال: قلم جاف أزرق (علبة 50)"></label>
  <label>السعر (ج.م)<input id="price" type="number" min="0" step="0.5" required></label>
  <div class="w"><label class="ck"><input type="checkbox" id="dc_on"> عليه خصم (يظهر السعر قبل الخصم مشطوبًا وبعده)</label>
   <div class="bar" id="dc_box" hidden style="margin-top:6px"><select id="dc_type"><option value="percent">نسبة خصم %</option><option value="amount">مبلغ خصم (ج.م)</option></select><input id="dc_val" type="number" min="0" step="0.5" placeholder="القيمة" style="width:130px"><b id="dc_pv"></b></div></div>
- <div class="w"><b style="font-size:14px">الألوان المتاحة</b> <span style="color:#767676;font-size:13px">(اكتبي اللون واضغطي «إضافة لون». العميل يختار منها قبل الطلب، ويظهر اللون في رسالة واتساب)</span>
+ <div class="w"><b style="font-size:14px">الألوان المتاحة</b> <span style="color:#767676;font-size:13px">(اكتب اللون واضغط «إضافة لون». العميل يختار منها قبل الطلب، ويظهر اللون في رسالة واتساب)</span>
   <div class="bar" style="margin-top:6px"><input id="colin" placeholder="مثال: كحلي" style="flex:1"><button type="button" class="g" id="coladd">إضافة لون</button></div><div class="pv" id="colchips" style="margin-top:8px"></div></div>
  <label>المقاس / الحجم (اختياري)<input id="size" placeholder="مثال: A4 أو 100 ورقة"></label>
  <label>العلامة<select id="tag"><option value="">بدون</option><option>جديد</option><option>الأكثر مبيعًا</option></select></label>
  <label class="w">وصف المنتج (اختياري — لو تُرك فارغًا يظهر وصف القسم)<textarea id="desc" rows="3"></textarea></label>
  <label class="w">المميزات (اختياري — كل ميزة في سطر)<textarea id="feat" rows="4" placeholder="خامة ناعمة وخفيفة&#10;أكمام واسعة&#10;مناسبة للمناسبات"></textarea></label>
- <label class="w">إضافة صور (حتى 6 صور). الصورة الأولى هي الأساسية، ورتّبيهم بالأسهم أو احذفي أي صورة<input id="imgs" type="file" accept="image/*" multiple></label>
+ <label class="w">إضافة صور (حتى 6 صور). الصورة الأولى هي الأساسية، ورتّبهم بالأسهم أو احذف أي صورة<input id="imgs" type="file" accept="image/*" multiple></label>
  <div class="w pv" id="pv"></div>
  <div class="w bar"><button type="submit" id="save">حفظ المنتج</button><button type="button" class="g" id="rst">مسح النموذج</button></div>
 </form>
@@ -57,12 +57,12 @@ h3{font-size:16px;margin:14px 0 0}.brr{display:grid;grid-template-columns:1fr 1f
 <div id="tA" hidden>
 <h2>إحصائيات الزيارات</h2>
 <p>إحصائيات الزيارات بتتم عن طريق <b>Vercel Web Analytics</b> (مجاني ضمن حدود الخطة)، وبتشوفها من لوحة Vercel نفسها.</p>
-<div class="m wn"><b>تفعيل مرة واحدة:</b> افتحي مشروع المكتبة في Vercel ← تبويب <b>Analytics</b> ← اضغطي <b>Enable</b>. بعدها اعملي زيارة للموقع وستظهر الأرقام خلال دقايق.</div>
+<div class="m wn"><b>تفعيل مرة واحدة:</b> افتح مشروع المكتبة في Vercel ← تبويب <b>Analytics</b> ← اضغط <b>Enable</b>. بعدها اعمل زيارة للموقع وستظهر الأرقام خلال دقايق.</div>
 <div class="bar"><a href="https://vercel.com/dashboard" target="_blank" rel="noopener"><button type="button">فتح إحصائيات الموقع</button></a></div>
-<h3>اللي هتشوفيه</h3>
+<h3>اللي هتشوفه</h3>
 <ul><li>عدد الزوار وعدد مرات فتح الصفحة (يومي/أسبوعي/شهري).</li><li>من أين جاء الزوار (واتساب، فيسبوك، إنستجرام، بحث...).</li><li>الدول والأجهزة (موبايل/كمبيوتر) والمتصفحات.</li></ul>
 <h3>ملاحظات</h3>
-<ul><li>الخطة المجانية (Hobby): 50,000 حدث في الشهر، ومدة حفظ البيانات شهر واحد.</li><li>عدد ضغطات «اطلبي عبر واتساب» لكل منتج بيتسجل كحدث مخصص، وبيظهر في Vercel على خطة Pro بس.</li><li>الإحصائيات مش بتظهر داخل هذه اللوحة، لكن تقدري تفتحيها بالزرار فوق.</li></ul>
+<ul><li>الخطة المجانية (Hobby): 50,000 حدث في الشهر، ومدة حفظ البيانات شهر واحد.</li><li>عدد ضغطات «اطلب عبر واتساب» لكل منتج بيتسجل كحدث مخصص، وبيظهر في Vercel على خطة Pro بس.</li><li>الإحصائيات مش بتظهر داخل هذه اللوحة، لكن تقدر تفتحها بالزرار فوق.</li></ul>
 </div>
 <div id="tS" hidden>
 <h2>إعدادات الموقع</h2>
@@ -70,7 +70,7 @@ h3{font-size:16px;margin:14px 0 0}.brr{display:grid;grid-template-columns:1fr 1f
  <label>عنوان الصفحة<input id="s_title"></label>
  <label>الجملة تحت العنوان<input id="s_sub"></label>
  <label>لون الأزرار والشارات<input id="s_ac" type="color" style="height:44px;padding:2px"></label>
- <label>اللوجو (اتركيه فارغًا للإبقاء على الحالي)<input id="s_logo" type="file" accept="image/*"></label>
+ <label>اللوجو (اتركه فارغًا للإبقاء على الحالي)<input id="s_logo" type="file" accept="image/*"></label>
  <div class="w pv" id="s_lp"></div>
  <h3 class="w">شريط الإعلان أعلى الصفحة</h3>
  <label class="w ck"><input type="checkbox" id="s_an_on"> إظهار الشريط</label>
@@ -111,8 +111,9 @@ let PW=sessionStorage.getItem("klpw")||"",L=[],E=null,IM=[],COL=[];
 async function api(b){const r=await fetch("/api/admin",{method:"POST",headers:{"Content-Type":"application/json","x-admin-password":PW},body:JSON.stringify(b)});
  const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||("خطأ "+r.status));return d}
 function msg(t,k){const m=$("#msg");m.hidden=!t;m.textContent=t||"";m.className="m "+(k||"")}
-const next=c=>{const pf=(CATL.find(x=>x.key==c)||{}).prefix||"XX",n=L.filter(p=>p.cat==c).map(p=>+(p.code.split("-")[1])||0);return pf+"-"+(n.length?Math.max(...n)+1:101)};
-function list(){$("#n").textContent=L.length;$("#tb").innerHTML=L.map(p=>`<tr><td><img src="${esc(src(p.images[0]||""))}" alt=""></td><td dir="ltr">${esc(p.code)}</td><td>${esc(p.name)}</td><td>${p.salePrice!=null?`<s style="color:#767676">${p.price}</s> <b>${p.salePrice}</b>`:p.price}</td><td><button class="g" data-e="${esc(p.code)}">تعديل</button> <button class="g" data-d="${esc(p.code)}">حذف</button></td></tr>`).join("")}
+const sugg=()=>{$("#code").placeholder="اختياري — مثال: "+next($("#cat").value)};
+const next=c=>{const pf=(CATL.find(x=>x.key==c)||{}).prefix||"XX",n=L.filter(p=>p.cat==c).map(p=>+((p.code||"").split("-")[1])||0);return pf+"-"+(n.length?Math.max(...n)+1:101)};
+function list(){$("#n").textContent=L.length;$("#tb").innerHTML=L.map(p=>`<tr><td><img src="${esc(src(p.images[0]||""))}" alt=""></td><td dir="ltr">${esc(p.code||"—")}</td><td>${esc(p.name)}</td><td>${p.salePrice!=null?`<s style="color:#767676">${p.price}</s> <b>${p.salePrice}</b>`:p.price}</td><td><button class="g" data-e="${esc(p.id||p.code)}">تعديل</button> <button class="g" data-d="${esc(p.id||p.code)}">حذف</button></td></tr>`).join("")}
 function dcPrev(){const on=$("#dc_on").checked;$("#dc_box").hidden=!on;const p=+$("#price").value,t=$("#dc_type").value,x=+$("#dc_val").value;
  if(!on||!p||!x){$("#dc_pv").textContent="";return}
  const f=t=="percent"?p*(1-x/100):p-x;$("#dc_pv").textContent=(f>0&&f<p)?`السعر بعد الخصم: ${Math.round(f*100)/100} ج.م (بدل ${p})`:"قيمة الخصم غير صحيحة"}
@@ -124,13 +125,13 @@ $("#coladd").onclick=addCol;$("#colin").onkeydown=e=>{if(e.key=="Enter"){e.preve
 $("#colchips").onclick=e=>{const i=e.target.dataset.ci;if(i!==undefined){COL.splice(+i,1);colRender()}};
 $("#pv").onclick=e=>{const b=e.target.closest("[data-mi]");if(!b)return;const i=+b.dataset.mi;
  if(b.dataset.x){IM.splice(i,1)}else{const j=i+ +b.dataset.d;if(j<0||j>=IM.length)return;[IM[i],IM[j]]=[IM[j],IM[i]]}pvRender()};
-function clear(){E=null;IM=[];COL=[];$("#f").reset();pvRender();colRender();$("#code").value=next($("#cat").value);$("#save").textContent="حفظ المنتج";$("#ft").textContent="إضافة منتج جديد"}
+function clear(){E=null;IM=[];COL=[];$("#f").reset();pvRender();colRender();$("#code").value="";sugg();$("#save").textContent="حفظ المنتج";$("#ft").textContent="إضافة منتج جديد"}
 async function enter(){const d=await api({action:"login"});$("#lg").hidden=true;$("#app").hidden=false;$("#warn").hidden=!!d.blob;sessionStorage.setItem("klpw",PW);if(d.blob){await refresh();await loadS()}}
 async function refresh(){const d=await api({action:"list"});L=d.products;$("#src").textContent=d.source=="blob"?"متصل بمخزن الموقع — أي تغيير يظهر على الموقع خلال دقيقة تقريبًا.":"القائمة الأولية — أول حفظ سيحوّلها إلى مخزن الموقع.";clear();list()}
 $("#go").onclick=async()=>{PW=$("#pw").value;$("#le").hidden=true;try{await enter()}catch(e){PW="";$("#le").hidden=false;$("#le").textContent=e.message}};
 $("#pw").onkeydown=e=>{if(e.key=="Enter")$("#go").click()};
 $("#out").onclick=()=>{sessionStorage.removeItem("klpw");location.reload()};
-$("#cat").onchange=()=>{if(!E)$("#code").value=next($("#cat").value)};
+$("#cat").onchange=()=>{if(!E)sugg()};
 $("#rst").onclick=()=>{clear();msg("")};
 function rs(file){return new Promise((ok,bad)=>{const i=new Image();i.onload=()=>{const k=Math.min(1,1000/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);c.toBlob(ok,"image/jpeg",.82)};i.onerror=()=>bad(new Error("تعذّر قراءة الصورة."));i.src=URL.createObjectURL(file)})}
 const b64=b=>new Promise(r=>{const f=new FileReader();f.onload=()=>r(String(f.result).split(",")[1]);f.readAsDataURL(b)});
@@ -138,15 +139,15 @@ $("#imgs").onchange=async e=>{for(const f of [...e.target.files]){if(IM.length>=
 $("#f").onsubmit=async e=>{e.preventDefault();const btn=$("#save");btn.disabled=true;msg("جارٍ الحفظ...");
  try{addCol();const code=$("#code").value.trim().toUpperCase(),images=[];
   for(let i=0;i<IM.length;i++){const it=IM[i];if(it.blob){msg(`جارٍ رفع الصورة ${i+1} من ${IM.length}...`);images.push((await api({action:"upload",data:await b64(it.blob)})).url)}else images.push(it.ref)}
-  if(!images.length)throw new Error("أضيفي صورة واحدة على الأقل.");
+  if(!images.length)throw new Error("أضف صورة واحدة على الأقل.");
   msg("جارٍ حفظ المنتج...");
   const p={code,name:$("#name").value.trim(),cat:$("#cat").value,price:+$("#price").value,discount:$("#dc_on").checked?{type:$("#dc_type").value,value:+$("#dc_val").value}:null,colors:COL.slice(),size:$("#size").value.trim(),tag:$("#tag").value,images,desc:$("#desc").value.trim(),features:$("#feat").value.split("\n").map(x=>x.trim()).filter(Boolean)};
-  const d=await api({action:"save",oldCode:E,product:p});L=d.products;clear();list();msg("تم حفظ "+code+". سيظهر على الموقع خلال دقيقة تقريبًا.","ok")
+  const d=await api({action:"save",oldId:E,product:p});L=d.products;clear();list();msg("تم حفظ "+(code||p.name)+". سيظهر على الموقع خلال دقيقة تقريبًا.","ok")
  }catch(x){msg(x.message,"err")}finally{btn.disabled=false}};
 $("#tb").onclick=async e=>{const d=e.target.dataset.d,ed=e.target.dataset.e;
- if(d&&confirm("حذف المنتج "+d+" نهائيًا؟")){msg("جارٍ الحذف...");try{L=(await api({action:"delete",code:d})).products;list();clear();msg("تم حذف "+d+".","ok")}catch(x){msg(x.message,"err")}}
- if(ed){const p=L.find(x=>x.code==ed);E=ed;IM=p.images.map(i=>({ref:i,prev:src(i)}));COL=(p.colors&&p.colors.length?p.colors:(p.color?[p.color]:[])).slice();pvRender();colRender();
-  $("#cat").value=p.cat;$("#code").value=p.code;$("#name").value=p.name;$("#price").value=p.price;$("#dc_on").checked=!!p.discount;$("#dc_type").value=p.discount?p.discount.type:"percent";$("#dc_val").value=p.discount?p.discount.value:"";dcPrev();$("#size").value=p.size||"";$("#tag").value=p.tag||"";$("#desc").value=p.desc||"";$("#feat").value=(p.features||[]).join("\n");$("#imgs").value="";
+ if(d&&confirm("حذف هذا المنتج نهائيًا؟")){msg("جارٍ الحذف...");try{L=(await api({action:"delete",id:d})).products;list();clear();msg("تم حذف المنتج.","ok")}catch(x){msg(x.message,"err")}}
+ if(ed){const p=L.find(x=>(x.id||x.code)==ed);E=ed;IM=p.images.map(i=>({ref:i,prev:src(i)}));COL=(p.colors&&p.colors.length?p.colors:(p.color?[p.color]:[])).slice();pvRender();colRender();
+  $("#cat").value=p.cat;$("#code").value=p.code||"";$("#name").value=p.name;$("#price").value=p.price;$("#dc_on").checked=!!p.discount;$("#dc_type").value=p.discount?p.discount.type:"percent";$("#dc_val").value=p.discount?p.discount.value:"";dcPrev();$("#size").value=p.size||"";$("#tag").value=p.tag||"";$("#desc").value=p.desc||"";$("#feat").value=(p.features||[]).join("\n");$("#imgs").value="";
   $("#save").textContent="حفظ التعديل";$("#ft").textContent="تعديل "+ed;msg("");scrollTo({top:0,behavior:"smooth"})}};
 
 let ST=null,LOGO=null;
@@ -175,7 +176,7 @@ $("#s_br").onclick=e=>{if(e.target.dataset.rm!==undefined)e.target.closest(".brr
 $("#s_addbr").onclick=()=>$("#s_br").insertAdjacentHTML("beforeend",brRow());
 function rsPng(file){return new Promise((ok,bad)=>{const i=new Image();i.onload=()=>{const k=Math.min(1,500/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext("2d").drawImage(i,0,0,c.width,c.height);c.toBlob(ok,"image/png")};i.onerror=()=>bad(new Error("تعذّر قراءة الصورة."));i.src=URL.createObjectURL(file)})}
 $("#s_logo").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{LOGO=await rsPng(f);$("#s_lp").innerHTML=`<img src="${URL.createObjectURL(LOGO)}" alt="">`}catch(x){smsg(x.message,"err")}};
-async function loadS(){const d=await api({action:"getSettings"});fillS(d.settings);setCats(d.settings.categories);if(!E)$("#code").value=next($("#cat").value)}
+async function loadS(){const d=await api({action:"getSettings"});fillS(d.settings);setCats(d.settings.categories);if(!E)sugg()}
 $("#sf").onsubmit=async e=>{e.preventDefault();const b=$("#s_save");b.disabled=true;smsg("جارٍ الحفظ...");
  try{const s=readS();if(LOGO){smsg("جارٍ رفع اللوجو...");s.logo=(await api({action:"upload",data:await b64(LOGO)})).url}
   const d=await api({action:"saveSettings",settings:s});fillS(d.settings);setCats(d.settings.categories);smsg("تم حفظ الإعدادات. ستظهر على الموقع خلال دقيقة تقريبًا.","ok")}catch(x){smsg(x.message,"err")}finally{b.disabled=false}};

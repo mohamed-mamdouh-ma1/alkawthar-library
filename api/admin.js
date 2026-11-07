@@ -3,13 +3,13 @@ import { catsOf, DEFAULTS, hasBlob, readList, writeList, readSettings, writeSett
 const s = (v, n) => String(v == null ? "" : v).trim().slice(0, n);
 function clean(p, keys) {
   const code = s(p.code, 20).toUpperCase();
-  if (!/^[A-Z0-9\-_\u0600-\u06FF]+$/.test(code)) throw new Error("الكود يقبل حروفًا وأرقامًا وشرطة فقط.");
+  if (code && !/^[A-Z0-9\-_\u0600-\u06FF]+$/.test(code)) throw new Error("الكود يقبل حروفًا وأرقامًا وشرطة فقط.");
   if (!keys.includes(p.cat)) throw new Error("القسم غير صحيح.");
   const price = Math.round(Number(p.price) * 100) / 100;
   if (!s(p.name, 200)) throw new Error("اسم المنتج مطلوب.");
   if (!isFinite(price) || price < 0) throw new Error("السعر غير صحيح.");
   const images = (Array.isArray(p.images) ? p.images : []).slice(0, 6).map(x => s(x, 500)).filter(x => /^https:\/\/[^\s]+$/.test(x) || /^[\w\-.]+\.(jpg|jpeg|png|webp)$/i.test(x));
-  if (!images.length) throw new Error("أضيفي صورة واحدة على الأقل.");
+  if (!images.length) throw new Error("أضف صورة واحدة على الأقل.");
   const colors = (Array.isArray(p.colors) ? p.colors : (p.color ? [p.color] : [])).map(x => s(x, 30)).filter(Boolean).filter((x, i, r) => r.indexOf(x) === i).slice(0, 12);
   let dc = null; const d = p.discount;
   if (d && d.type) {
@@ -72,8 +72,10 @@ export default async function handler(req, res) {
     }
     if (b.action === "save") {
       const { settings: cur } = await readSettings({ strict: true }), p = clean(b.product || {}, cur.categories.map(c => c.key)), { list } = await readList({ strict: true });
-      const old = b.oldCode ? list.findIndex(x => x.code === b.oldCode) : -1;
-      if (list.some((x, i) => x.code === p.code && i !== old)) throw new Error("الكود مستخدم بالفعل لمنتج آخر.");
+      const key = x => x.id || x.code, oldKey = b.oldId || b.oldCode;
+      const old = oldKey ? list.findIndex(x => key(x) === oldKey) : -1;
+      if (p.code && list.some((x, i) => x.code === p.code && i !== old)) throw new Error("الكود مستخدم بالفعل لمنتج آخر.");
+      p.id = old >= 0 ? key(list[old]) : ((p.code && !list.some(x => key(x) === p.code)) ? p.code : "P" + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2, 4).toUpperCase());
       const before = old >= 0 ? list[old] : null;
       if (old >= 0) list[old] = p; else list.push(p);
       await writeList(list);
@@ -81,7 +83,7 @@ export default async function handler(req, res) {
       return res.json({ products: list });
     }
     if (b.action === "delete") {
-      const { list } = await readList({ strict: true }), i = list.findIndex(x => x.code === b.code);
+      const { list } = await readList({ strict: true }), i = list.findIndex(x => (x.id || x.code) === (b.id || b.code));
       if (i < 0) throw new Error("المنتج غير موجود.");
       const [gone] = list.splice(i, 1), used = new Set(list.flatMap(x => x.images));
       await writeList(list);
@@ -96,7 +98,7 @@ export default async function handler(req, res) {
       const bad = Object.keys(used);
       if (bad.length) {
         const old = (await readSettings({ strict: true })).settings, nm = k => (old.categories.find(c => c.key === k) || {}).name || k;
-        throw new Error("لا يمكن حذف قسم فيه منتجات: " + bad.map(k => "«" + nm(k) + "» (" + used[k] + " منتج)").join("، ") + ". انقلي منتجاته لقسم آخر أو احذفيها أولًا.");
+        throw new Error("لا يمكن حذف قسم فيه منتجات: " + bad.map(k => "«" + nm(k) + "» (" + used[k] + " منتج)").join("، ") + ". انقل منتجاته لقسم آخر أو احذفها أولًا.");
       }
       await writeSettings(st); return res.json({ settings: st });
     }

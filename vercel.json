@@ -9,6 +9,10 @@
     {
       "source": "/p/:code",
       "destination": "/api/p?code=:code"
+    },
+    {
+      "source": "/logo.png",
+      "destination": "/api/logo"
     }
   ],
   "crons": [
